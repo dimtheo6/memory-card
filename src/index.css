@@ -7,6 +7,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+
 }
 
 .container{
@@ -97,16 +98,24 @@ img{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 30px 70px;
     gap: 15px;
     background-color: rgb(243, 240, 240);
-    border-radius: 20px;
+    border-width: 10px;
+    border-style: solid; 
+    border-image-source: url(images/border.png);
+    border-image-slice: 30% 20%; /* Define how to slice the image for each side */
+    border-image-width: 40px; /* Adjust this to control the thickness */
+    
     z-index: 1000;
 }
 
+.startScreen{
+    padding: 20px 60px;
+}
 .gameOverModal{
     justify-content: center;
     align-items: center;
+    padding: 30px 70px;
 }
 
 .overlay{

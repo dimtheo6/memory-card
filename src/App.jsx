@@ -1,6 +1,6 @@
 import PokemonList from "./Components/pokemon";
 import Header from "./Components/header";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SelectLevel from "./Components/selectLevel";
 
 export default function App() {
@@ -15,7 +15,11 @@ export default function App() {
           <PokemonList cards={cards} setGameStart={setGameStart}/>
         </>
       ) : (
-        <SelectLevel setCards={setCards} setGameStart={setGameStart} />
+        <>
+         <div className="overlay"></div>
+         <SelectLevel setCards={setCards} setGameStart={setGameStart} />
+        </>
+        
       )}
     </div>
   );

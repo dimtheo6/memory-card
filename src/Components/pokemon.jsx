@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import Shuffle from "./shuffle";
 import GameOverModal from "./gameOverModal";
+import Tilt from "react-parallax-tilt";
 
-function PokemonList({cards,setGameStart}) {
+function PokemonList({ cards, setGameStart }) {
   const [pokemons, setPokemons] = useState([]);
   const [pokemonIds, setPokemonIds] = useState([]);
   const [gameOver, setGameOver] = useState(false);
-  const [winner,setWinner] = useState(false);
+  const [winner, setWinner] = useState(false);
   const [score, setScore] = useState(0);
 
   function getRandomInt() {
@@ -23,18 +24,16 @@ function PokemonList({cards,setGameStart}) {
   const onPLayAgain = () => {
     setPokemons([]);
     setGameOver(false);
-    setWinner(false)
+    setWinner(false);
     getIds();
 
     setScore(0);
     fetchPokemons();
   };
 
-  const onQuit = () =>{
+  const onQuit = () => {
     setGameStart(false);
-  }
-
-  
+  };
 
   const getIds = () => {
     const ids = [];
@@ -48,27 +47,23 @@ function PokemonList({cards,setGameStart}) {
     setPokemonIds(ids);
   };
 
-  const cardClass = () =>{
+  const cardClass = () => {
     const cards = document.querySelectorAll(".card");
 
     cards.forEach((item) => {
-      
-        item.classList.add("active");
-      
+      item.classList.add("active");
     });
-
-
 
     setTimeout(() => {
       cards.forEach((item) => {
         setTimeout(() => {
           item.classList.remove("active");
-        },10);
+        }, 10);
       });
 
       handleShuffle(); // Shuffle after a successful click
     }, 1000);
-  }
+  };
 
   const handleCardClick = (index) => {
     if (gameOver) return;
@@ -78,8 +73,8 @@ function PokemonList({cards,setGameStart}) {
 
     // Increment click count
     clickedPokemon.clickCount += 1;
-    
-    if (score == pokemonIds.length - 1){
+
+    if (score == pokemonIds.length - 1) {
       setGameOver(true);
       setWinner(true);
     }
@@ -90,13 +85,11 @@ function PokemonList({cards,setGameStart}) {
     } else {
       // Update state with incremented click count and shuffled Pokémon list
 
-
-      console.log(score)
+      console.log(score);
       cardClass();
       setPokemons(updatedPokemons);
       setScore((score) => score + 1);
     }
-
   };
 
   useEffect(() => {
@@ -137,17 +130,24 @@ function PokemonList({cards,setGameStart}) {
 
   return (
     <div className="main">
-    <GameOverModal open={gameOver} onPLayAgain={onPLayAgain} onQuit={onQuit} score={score} winner={winner}/>
-        <div>
-          <h1>Your Score is: {score}</h1>
-          
-          <h1>
-            {score}/{pokemonIds.length}
-          </h1>
-          <div className="card_container">
-            {pokemons.length > 0 ? (
-              pokemons.map((pokemon, index) => (
-                <div key={pokemon.id} className="card">
+      <GameOverModal
+        open={gameOver}
+        onPLayAgain={onPLayAgain}
+        onQuit={onQuit}
+        score={score}
+        winner={winner}
+      />
+      <div>
+        <h1>Your Score is: {score}</h1>
+
+        <h1>
+          {score}/{pokemonIds.length}
+        </h1>
+        <div className="card_container">
+          {pokemons.length > 0 ? (
+            pokemons.map((pokemon, index) => (
+              <Tilt key={pokemon.id}>
+                <div className="card">
                   <div
                     className="poke_card"
                     onClick={() => handleCardClick(index)}
@@ -163,13 +163,13 @@ function PokemonList({cards,setGameStart}) {
                     <img src="./src/images/card_back.jpg" alt="" />
                   </div>
                 </div>
-              ))
-            ) : (
-              <p>Loading...</p>
-            )}
-          </div>
+              </Tilt>
+            ))
+          ) : (
+            <p>Loading...</p>
+          )}
         </div>
-  
+      </div>
     </div>
   );
 }
