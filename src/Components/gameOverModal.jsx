@@ -1,7 +1,7 @@
 import ReactDom from "react-dom";
 
-export default function GameOverModal({ open, onPLayAgain, score,winner }) {
-  //if (!open) return null;
+export default function GameOverModal({ open, onPLayAgain,onQuit, score,winner }) {
+  if (!open) return null;
   return ReactDom.createPortal(
     <>
       <div className="overlay"></div>
@@ -21,7 +21,7 @@ export default function GameOverModal({ open, onPLayAgain, score,winner }) {
           <button className="playAgain" onClick={onPLayAgain}>
             Restart
           </button>
-          <button className="quit">Quit</button>
+          <button className="quit" onClick={onQuit}>Quit</button>
         </div>
       </div>
     </>,

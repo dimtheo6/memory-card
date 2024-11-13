@@ -37,7 +37,7 @@ img{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 50px;
+    gap: 30px;
     perspective: 1000px;
 }
 
@@ -89,21 +89,24 @@ img{
 
   /*#endregion*/
 
-.gameOverModal{
+/*#region modals*/
+.gameOverModal,.startScreen{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 30px 70px;
     gap: 15px;
-    
     background-color: rgb(243, 240, 240);
     border-radius: 20px;
     z-index: 1000;
+}
+
+.gameOverModal{
+    justify-content: center;
+    align-items: center;
 }
 
 .overlay{
@@ -126,14 +129,14 @@ img{
     font-size: 20px;
 }
 
-.buttonWrapper{
+.buttonWrapper,.levelWrapper{
     display: flex;
     flex-direction: column;
     justify-content: left;
     gap: 8px;
 }
 
-.playAgain,.quit{
+.playAgain,.quit,.level{
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -160,3 +163,4 @@ button:before{
 button:hover:before{
     opacity: 1;
 }
+/*#endregion */

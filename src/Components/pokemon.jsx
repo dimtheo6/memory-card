@@ -2,14 +2,12 @@ import { useEffect, useState } from "react";
 import Shuffle from "./shuffle";
 import GameOverModal from "./gameOverModal";
 
-function PokemonList() {
+function PokemonList({cards,setGameStart}) {
   const [pokemons, setPokemons] = useState([]);
   const [pokemonIds, setPokemonIds] = useState([]);
   const [gameOver, setGameOver] = useState(false);
-  const [winner,setWinner] = useState(true);
+  const [winner,setWinner] = useState(false);
   const [score, setScore] = useState(0);
-
-  let cards = 5;
 
   function getRandomInt() {
     return Math.floor(Math.random() * 151) + 1;
@@ -27,11 +25,16 @@ function PokemonList() {
     setGameOver(false);
     setWinner(false)
     getIds();
-    
 
     setScore(0);
     fetchPokemons();
   };
+
+  const onQuit = () =>{
+    setGameStart(false);
+  }
+
+  
 
   const getIds = () => {
     const ids = [];
@@ -134,7 +137,7 @@ function PokemonList() {
 
   return (
     <div className="main">
-    <GameOverModal open={gameOver} onPLayAgain={onPLayAgain} score={score} winner={winner}/>
+    <GameOverModal open={gameOver} onPLayAgain={onPLayAgain} onQuit={onQuit} score={score} winner={winner}/>
         <div>
           <h1>Your Score is: {score}</h1>
           
