@@ -1,68 +1,172 @@
-import  { useEffect, useState } from 'react';
-import Shuffle from './shuffle';
+import { useEffect, useState } from "react";
+import Shuffle from "./shuffle";
+import GameOverModal from "./gameOverModal";
 
 function PokemonList() {
   const [pokemons, setPokemons] = useState([]);
   const [pokemonIds, setPokemonIds] = useState([]);
+  const [gameOver, setGameOver] = useState(false);
+  const [winner,setWinner] = useState(true);
+  const [score, setScore] = useState(0);
 
-  const cards = 5;
+  let cards = 5;
 
   function getRandomInt() {
     return Math.floor(Math.random() * 151) + 1;
   }
 
-  const handleShuffle = () =>{
-    const shuffledPokemons = [...pokemons]
-    Shuffle(shuffledPokemons)
-    setPokemons(shuffledPokemons)
-  }
+  const handleShuffle = () => {
+    const shuffledPokemons = [...pokemons];
+    Shuffle(shuffledPokemons);
+    setPokemons(shuffledPokemons);
+    console.log(pokemons);
+  };
 
-  // Generate random Pokémon IDs only once when the component mounts
-  useEffect(() => {
+  const onPLayAgain = () => {
+    setPokemons([]);
+    setGameOver(false);
+    setWinner(false)
+    getIds();
+    
+
+    setScore(0);
+    fetchPokemons();
+  };
+
+  const getIds = () => {
     const ids = [];
-    for (let i = 0; i < cards; i++) {
-      ids.push(getRandomInt());
+
+    while (ids.length < cards) {
+      const randomId = getRandomInt();
+      if (!ids.includes(randomId)) {
+        ids.push(randomId);
+      }
     }
     setPokemonIds(ids);
-  }, []);
+  };
+
+  const cardClass = () =>{
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach((item) => {
+      
+        item.classList.add("active");
+      
+    });
+
+
+
+    setTimeout(() => {
+      cards.forEach((item) => {
+        setTimeout(() => {
+          item.classList.remove("active");
+        },10);
+      });
+
+      handleShuffle(); // Shuffle after a successful click
+    }, 1000);
+  }
+
+  const handleCardClick = (index) => {
+    if (gameOver) return;
+
+    const updatedPokemons = [...pokemons];
+    const clickedPokemon = updatedPokemons[index];
+
+    // Increment click count
+    clickedPokemon.clickCount += 1;
+    
+    if (score == pokemonIds.length - 1){
+      setGameOver(true);
+      setWinner(true);
+    }
+
+    if (clickedPokemon.clickCount > 1) {
+      // Lose condition: if clicked twice
+      setGameOver(true);
+    } else {
+      // Update state with incremented click count and shuffled Pokémon list
+
+
+      console.log(score)
+      cardClass();
+      setPokemons(updatedPokemons);
+      setScore((score) => score + 1);
+    }
+
+  };
 
   useEffect(() => {
-    const fetchPokemons = async () => {
-      try {
-        const data = await Promise.all(
-          pokemonIds.map(id =>
-            fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(response => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.json();
-            })
-          )
-        );
-        console.log(data)
-        setPokemons(data);
-      } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-      }
-    };
+    getIds();
+  }, []);
 
-    if (pokemonIds.length > 0) { // Only fetch if there are IDs
+  const fetchPokemons = async () => {
+    try {
+      const data = await Promise.all(
+        pokemonIds.map((id) =>
+          fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+        )
+      );
+      console.log(data);
+
+      const pokemonsWithClicks = data.map((pokemon) => ({
+        ...pokemon,
+        clickCount: 0,
+      }));
+
+      setPokemons(pokemonsWithClicks);
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (pokemonIds.length > 0) {
+      // Only fetch if there are IDs
       fetchPokemons();
     }
   }, [pokemonIds]);
 
   return (
-    <div>
-      {pokemons.length > 0 ? (
-        pokemons.map(pokemon => (
-          <div key={pokemon.id} className='card' onClick={handleShuffle}>
-            <img src={pokemon.sprites.front_default} alt="pokemon card" />
-            <h1>{pokemon.name}</h1>
+    <div className="main">
+    <GameOverModal open={gameOver} onPLayAgain={onPLayAgain} score={score} winner={winner}/>
+        <div>
+          <h1>Your Score is: {score}</h1>
+          
+          <h1>
+            {score}/{pokemonIds.length}
+          </h1>
+          <div className="card_container">
+            {pokemons.length > 0 ? (
+              pokemons.map((pokemon, index) => (
+                <div key={pokemon.id} className="card">
+                  <div
+                    className="poke_card"
+                    onClick={() => handleCardClick(index)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <img
+                      src={pokemon.sprites.other.dream_world.front_default}
+                      className="poke_image"
+                    />
+                    <h1 className="poke_name">{pokemon.name}</h1>
+                  </div>
+                  <div className="card_back">
+                    <img src="./src/images/card_back.jpg" alt="" />
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>Loading...</p>
+            )}
           </div>
-        ))
-      ) : (
-        <p>Loading...</p>
-      )}
+        </div>
+  
     </div>
   );
 }

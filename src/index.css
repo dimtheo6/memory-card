@@ -1,0 +1,162 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url(images/background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main{
+    display: flex;
+    width: 100vw;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+/*#region cards*/
+
+img{
+    width: 80%;
+    height: 60%;
+}
+
+.card_container{
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    perspective: 1000px;
+}
+
+.poke_card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(5, 5, 5, 0.37);
+    min-height: 250px;
+    width: 180px;
+}
+
+.poke_card h1 {
+   color: white;
+}
+
+.card{
+    position: relative;
+    min-height: 250px;
+    width: 180px;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    
+}
+
+.poke_card, .card_back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+  }
+
+  /* Style the back side */
+  .card_back {
+    transform: rotateY(180deg);
+  }
+
+  .card_back img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+
+  .active {
+    transform: rotateY(180deg);
+  }
+
+  /*#endregion*/
+
+.gameOverModal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px 70px;
+    gap: 15px;
+    
+    background-color: rgb(243, 240, 240);
+    border-radius: 20px;
+    z-index: 1000;
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapper p{
+    font-size: 20px;
+}
+
+.buttonWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    gap: 8px;
+}
+
+.playAgain,.quit{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+    width: 100px;
+    text-align: left;
+    padding-left: 15px;
+    position:relative;
+
+}
+
+
+
+button:before{
+    content:'►';
+    font-size:15px;
+    top: 0.5em;
+    left: -0.5em;
+    position: absolute;
+    opacity:0;
+   
+  }
+
+button:hover:before{
+    opacity: 1;
+}
