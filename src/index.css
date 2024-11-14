@@ -1,262 +1,276 @@
-body{
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background-image: url(images/background.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-
+@font-face {
+  font-family: "ArcadeClassic";
+  src: url("src/font/arcadeclassic.regular.ttf") format("truetype");
 }
 
-header h1{
-    font-size: 40px;
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-image: url(images/background.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-.container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+/*#region fonts*/
+
+.main > div > h1,
+.startScreen,
+button,
+.gameOverModal {
+  font-family: "ArcadeClassic";
 }
 
-.main{
-    display: flex;
-    width: 100vw;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+header h1 {
+  font-family: "ArcadeClassic";
+  font-size: 50px;
+}
+
+.startScreen {
+  font-size: 1.2rem;
+}
+
+.wrapper h2 {
+  font-size: 2rem;
+}
+
+.wrapper p {
+  display: flex;
+  gap: 10px;
+  font-size: 25px;
+}
+
+/*#endregion*/
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 /*#region cards*/
 
-img{
-    width: 80%;
-    height: 60%;
+img {
+  width: 80%;
+  height: 60%;
 }
 
-.card_container{
-    
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 50px;
-    gap: 30px;
-    perspective: 1000px;
+.card_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 50px;
+  gap: 30px;
+  perspective: 1000px;
 }
 
-.poke_card{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(5, 5, 5, 0.37);
-    min-height: 250px;
-    width: 180px;
+.poke_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(5, 5, 5, 0.37);
+  min-height: 250px;
+  width: 180px;
 }
 
 .poke_card h1 {
-   color: white;
+  color: white;
 }
 
-.card{
-    position: relative;
-    min-height: 250px;
-    width: 180px;
-    transition: transform 0.8s ease-in;
-    transform-style: preserve-3d;
-    
+.card {
+  position: relative;
+  min-height: 250px;
+  width: 180px;
+  transition: transform 0.8s ease-in;
+  transform-style: preserve-3d;
 }
 
-.poke_card, .card_back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 10px;
-  }
+.poke_card,
+.card_back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+}
 
-  /* Style the back side */
-  .card_back {
-    transform: rotateY(180deg);
-  }
+/* Style the back side */
+.card_back {
+  transform: rotateY(180deg);
+}
 
-  .card_back img{
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-  }
+.card_back img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
 
-  .active {
-    transform: rotateY(180deg);
-  }
+.active {
+  transform: rotateY(180deg);
+}
 
-  /*#endregion*/
+/*#endregion*/
 
 /*#region modals*/
-.gameOverModal,.startScreen{
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    gap: 15px;
-    background-color: rgb(243, 240, 240);
-    border-width: 10px;
-    border-style: solid; 
-    border-image-source: url(images/border.png);
-    border-image-slice: 30% 20%; /* Define how to slice the image for each side */
-    border-image-width: 40px; /* Adjust this to control the thickness */
-    
-    z-index: 1000;
+.gameOverModal,
+.startScreen {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  gap: 15px;
+  background-color: rgb(243, 240, 240);
+  border-width: 10px;
+  border-style: solid;
+  border-image-source: url(images/border.png);
+  border-image-slice: 30% 20%; /* Define how to slice the image for each side */
+  border-image-width: 40px; /* Adjust this to control the thickness */
+
+  z-index: 1000;
 }
 
-.startScreen{
-    padding: 25px 50px;
+.startScreen {
+  padding: 25px 50px;
 }
 
-
-
-.gameOverModal{
-    justify-content: center;
-    align-items: center;
-    padding: 30px 70px;
+.gameOverModal {
+  justify-content: center;
+  align-items: center;
+  padding: 30px 70px;
 }
 
-.overlay{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1000;
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
 }
 
-.wrapper{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.wrapper p{
-    font-size: 20px;
+.buttonWrapper,
+.levelWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 8px;
 }
 
-.buttonWrapper,.levelWrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    gap: 8px;
+.playAgain,
+.quit,
+.level {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 25px;
+  width: 100px;
+  text-align: left;
+  padding-left: 15px;
+  position: relative;
 }
 
-.playAgain,.quit,.level{
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 25px;
-    width: 100px;
-    text-align: left;
-    padding-left: 15px;
-    position:relative;
-
+button:before {
+  content: "►";
+  font-size: 15px;
+  top: 0.5em;
+  left: -0.5em;
+  position: absolute;
+  opacity: 0;
 }
 
-
-
-button:before{
-    content:'►';
-    font-size:15px;
-    top: 0.5em;
-    left: -0.5em;
-    position: absolute;
-    opacity:0;
-   
-  }
-
-button:hover:before{
-    opacity: 1;
+button:hover:before {
+  opacity: 1;
 }
 /*#endregion */
 
+.music-icon-wrapper,
+.info {
+  position: fixed;
+  display: flex;
 
+  display: inline-block;
 
+  width: 30px; /* Adjust as needed */
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 5px;
+  background-color: rgba(253, 147, 47, 0.938);
+  cursor: pointer;
+}
 
-.music-icon-wrapper,.info {
-    position: fixed;
-    display: flex;
+.music-icon-wrapper {
+  top: 1rem;
+  left: 20px;
+}
 
-    
-    display: inline-block;
+.info {
+  top: 1rem;
+  left: 80px;
 
-    width: 30px; /* Adjust as needed */
-    height: 30px;
-    border: 1px solid black;
-    border-radius: 50%;
-    padding: 5px;
-    background-color: rgba(253, 147, 47, 0.938);
-    cursor: pointer;
-  }
+  font-size: 30px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
- 
-  .music-icon-wrapper{
-    top: 1rem;
-    left: 20px;
-  }
+.info-text {
+  position: fixed;
+  top: -3rem;
+  left: 9rem;
+  width: 300px;
+  height: 40px;
+  font-weight: 900;
+  text-align: center;
+  border-radius: 50px;
+  background-color: rgba(253, 156, 44, 0.753);
+  transition: transform 1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .info{
-    top: 1rem;
-    left: 80px;
+.info-text.open {
+  transform: translateY(5rem);
+}
 
-    font-size: 30px;
-    font-weight: 900;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+/* Music Icon */
+.music-icon {
+  width: 100%;
+  height: 100%;
+}
 
-  .info-text{
-    position: fixed;
-    top: -3rem;
-    left: 9rem;
-    width: 300px;
-    height: 40px;
-    font-weight: 900;
-    text-align: center;
-    border-radius: 50px;
-    background-color: rgba(253, 156, 44, 0.753);
-    transition: transform 1s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .info-text.open{
-    transform: translateY(5rem)
-  }
-  
-  /* Music Icon */
-  .music-icon {
-    width: 100%;
-    height: 100%;
-  }
-  
-  /* Strikethrough line */
-  .strikethrough {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 3px; /* Thickness of the line */
-    background-color: red; /* Color of the line */
-    transform: rotate(-45deg); /* Diagonal line */
-    transform-origin: center;
-  }
-
-
-  
-  
-  
+/* Strikethrough line */
+.strikethrough {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 3px; /* Thickness of the line */
+  background-color: red; /* Color of the line */
+  transform: rotate(-45deg); /* Diagonal line */
+  transform-origin: center;
+}
