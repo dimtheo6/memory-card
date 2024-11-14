@@ -10,6 +10,10 @@ body{
 
 }
 
+header h1{
+    font-size: 40px;
+}
+
 .container{
     display: flex;
     flex-direction: column;
@@ -38,6 +42,7 @@ img{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 50px;
     gap: 30px;
     perspective: 1000px;
 }
@@ -60,7 +65,7 @@ img{
     position: relative;
     min-height: 250px;
     width: 180px;
-    transition: transform 0.8s;
+    transition: transform 0.8s ease-in;
     transform-style: preserve-3d;
     
 }
@@ -212,6 +217,26 @@ button:hover:before{
     align-items: center;
     justify-content: center;
   }
+
+  .info-text{
+    position: fixed;
+    top: -3rem;
+    left: 9rem;
+    width: 300px;
+    height: 40px;
+    font-weight: 900;
+    text-align: center;
+    border-radius: 50px;
+    background-color: rgba(253, 156, 44, 0.753);
+    transition: transform 1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .info-text.open{
+    transform: translateY(5rem)
+  }
   
   /* Music Icon */
   .music-icon {
@@ -230,6 +255,8 @@ button:hover:before{
     transform: rotate(-45deg); /* Diagonal line */
     transform-origin: center;
   }
+
+
   
   
   

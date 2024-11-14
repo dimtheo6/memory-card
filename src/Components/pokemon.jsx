@@ -24,6 +24,12 @@ function PokemonList({ cards, setGameStart }) {
     setPokemons(shuffledPokemons);
   };
 
+  const sound = () => {
+    setPlaySound(true);
+
+    setTimeout(() => setPlaySound(false), 100); // Reset after a short delay
+  };
+
   const onPLayAgain = () => {
     setPokemons([]);
     setGameOver(false);
@@ -74,9 +80,7 @@ function PokemonList({ cards, setGameStart }) {
     const updatedPokemons = [...pokemons];
     const clickedPokemon = updatedPokemons[index];
 
-    setPlaySound(true);
-
-    setTimeout(() => setPlaySound(false), 100); // Reset after a short delay
+    sound(); //sets playsound to true
 
     // Increment click count
     clickedPokemon.clickCount += 1;
@@ -143,7 +147,7 @@ function PokemonList({ cards, setGameStart }) {
         winner={winner}
       />
       <div>
-        <h1>Your Score is: {score}</h1>
+        <h1>Score: {score}</h1>
 
         <h1>
           {score}/{pokemonIds.length}

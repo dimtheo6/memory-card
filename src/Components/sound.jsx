@@ -1,11 +1,10 @@
-import { useEffect, useRef,useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-function SoundClick({ playSound,src }) {
+function SoundClick({ playSound, src }) {
   const [volume, setVolume] = useState(0.1);
   const audioRef = useRef(new Audio(src));
 
   audioRef.current.volume = volume;
-  
 
   useEffect(() => {
     if (playSound) {

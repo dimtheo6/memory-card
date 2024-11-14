@@ -15,7 +15,6 @@ export default function SelectLevel({ setCards, setGameStart }) {
 
   return (
     <div className="startScreen">
-
       <h3>Select your difficulty Level</h3>
       <div className="levelWrapper">
         <button className="level" onClick={handleClick}>
