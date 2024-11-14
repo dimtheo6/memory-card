@@ -6,7 +6,7 @@ function MusicButton() {
   const audioRef = useRef(null); // Initialize ref with null
 
   useEffect(() => {
-    audioRef.current = new Audio("public/sounds/theme.mp3");
+    audioRef.current = new Audio("/sounds/theme.mp3");
 
     audioRef.current.volume = volume;
     audioRef.current.loop = true;

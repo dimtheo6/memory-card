@@ -12,7 +12,7 @@ function PokemonList({ cards, setGameStart }) {
   const [score, setScore] = useState(0);
   const [playSound, setPlaySound] = useState(false);
 
-  const flip = "public/sounds/flip.mp3";
+  const flip = "/sounds/flip.mp3";
 
   function getRandomInt() {
     return Math.floor(Math.random() * 151) + 1;
