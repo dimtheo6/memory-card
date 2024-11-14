@@ -10,7 +10,7 @@ export default function GameOverModal({ open, onPLayAgain,onQuit, score,winner }
         
           <h2>{winner ? 'You Won!' : 'Game Over!'}</h2>
           <img
-            src={winner ? 'public/images/pikaDancing.gif' : 'public/images/pikaCrying.webp'}
+            src={winner ? '/images/pikaDancing.gif' : '/images/pikaCrying.webp'}
             style={{ width: 250, height: 200 }}
             alt="pikachu crying"
           />

@@ -33,7 +33,7 @@ function MusicButton() {
 
   return (
     <div className="music-icon-wrapper" onClick={togglePlay}>
-      <img src="public/images/music.png" className="music-icon" alt="Music Icon" />
+      <img src="/images/music.png" className="music-icon" alt="Music Icon" />
       {!isPlaying && <div className="strikethrough"></div>}
     </div>
   );

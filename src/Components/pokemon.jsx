@@ -170,7 +170,7 @@ function PokemonList({ cards, setGameStart }) {
                     <h1 className="poke_name">{pokemon.name}</h1>
                   </div>
                   <div className="card_back">
-                    <img src="./public/images/card_back.jpg" alt="" />
+                    <img src="/images/card_back.jpg" alt="" />
                   </div>
                 </div>
               </Tilt>
