@@ -6,7 +6,7 @@ function MusicButton() {
   const audioRef = useRef(null); // Initialize ref with null
 
   useEffect(() => {
-    audioRef.current = new Audio("src/sounds/theme.mp3");
+    audioRef.current = new Audio("public/sounds/theme.mp3");
 
     audioRef.current.volume = volume;
     audioRef.current.loop = true;
@@ -33,7 +33,7 @@ function MusicButton() {
 
   return (
     <div className="music-icon-wrapper" onClick={togglePlay}>
-      <img src="src/images/music.png" className="music-icon" alt="Music Icon" />
+      <img src="public/images/music.png" className="music-icon" alt="Music Icon" />
       {!isPlaying && <div className="strikethrough"></div>}
     </div>
   );

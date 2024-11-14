@@ -12,7 +12,7 @@ function PokemonList({ cards, setGameStart }) {
   const [score, setScore] = useState(0);
   const [playSound, setPlaySound] = useState(false);
 
-  const flip = "src/sounds/flip.mp3";
+  const flip = "public/sounds/flip.mp3";
 
   function getRandomInt() {
     return Math.floor(Math.random() * 151) + 1;
@@ -170,7 +170,7 @@ function PokemonList({ cards, setGameStart }) {
                     <h1 className="poke_name">{pokemon.name}</h1>
                   </div>
                   <div className="card_back">
-                    <img src="./src/images/card_back.jpg" alt="" />
+                    <img src="./public/images/card_back.jpg" alt="" />
                   </div>
                 </div>
               </Tilt>
