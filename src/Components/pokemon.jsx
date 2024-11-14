@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Shuffle from "./shuffle";
 import GameOverModal from "./gameOverModal";
 import Tilt from "react-parallax-tilt";
+import SoundClick from "./sound";
 
 function PokemonList({ cards, setGameStart }) {
   const [pokemons, setPokemons] = useState([]);
@@ -9,6 +10,9 @@ function PokemonList({ cards, setGameStart }) {
   const [gameOver, setGameOver] = useState(false);
   const [winner, setWinner] = useState(false);
   const [score, setScore] = useState(0);
+  const [playSound, setPlaySound] = useState(false);
+
+  const flip = "src/sounds/flip.mp3";
 
   function getRandomInt() {
     return Math.floor(Math.random() * 151) + 1;
@@ -18,7 +22,6 @@ function PokemonList({ cards, setGameStart }) {
     const shuffledPokemons = [...pokemons];
     Shuffle(shuffledPokemons);
     setPokemons(shuffledPokemons);
-    console.log(pokemons);
   };
 
   const onPLayAgain = () => {
@@ -71,6 +74,10 @@ function PokemonList({ cards, setGameStart }) {
     const updatedPokemons = [...pokemons];
     const clickedPokemon = updatedPokemons[index];
 
+    setPlaySound(true);
+
+    setTimeout(() => setPlaySound(false), 100); // Reset after a short delay
+
     // Increment click count
     clickedPokemon.clickCount += 1;
 
@@ -85,7 +92,6 @@ function PokemonList({ cards, setGameStart }) {
     } else {
       // Update state with incremented click count and shuffled Pokémon list
 
-      console.log(score);
       cardClass();
       setPokemons(updatedPokemons);
       setScore((score) => score + 1);
@@ -108,7 +114,6 @@ function PokemonList({ cards, setGameStart }) {
           })
         )
       );
-      console.log(data);
 
       const pokemonsWithClicks = data.map((pokemon) => ({
         ...pokemon,
@@ -148,6 +153,7 @@ function PokemonList({ cards, setGameStart }) {
             pokemons.map((pokemon, index) => (
               <Tilt key={pokemon.id}>
                 <div className="card">
+                  <SoundClick playSound={playSound} src={flip} />
                   <div
                     className="poke_card"
                     onClick={() => handleCardClick(index)}
