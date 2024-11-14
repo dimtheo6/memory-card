@@ -1,13 +1,13 @@
 @font-face {
   font-family: "ArcadeClassic";
-  src: url("font/arcadeclassic.regular.ttf") format("truetype");
+  src: url("/font/arcadeclassic.regular.ttf") format("truetype");
 }
 
 body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-image: url(images/background.jpg);
+  background-image: url(/images/background.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -137,7 +137,7 @@ img {
   background-color: rgb(243, 240, 240);
   border-width: 10px;
   border-style: solid;
-  border-image-source: url(images/border.png);
+  border-image-source: url(/images/border.png);
   border-image-slice: 30% 20%; /* Define how to slice the image for each side */
   border-image-width: 40px; /* Adjust this to control the thickness */
 
